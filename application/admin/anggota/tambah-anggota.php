@@ -1,3 +1,15 @@
+<?php
+require_once 'C:\laragon\www\vsga\helper\path-helper.php';
+require_once $anggotaControlerPath;
+
+$errors = [];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $errors = $controller->addAnggota();
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,37 +41,37 @@
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">Tambah Anggota</h1>
                 </div>
+                <?php if (count($errors) > 0) : ?>
+                    <div class="alert alert-danger" role="alert">
+                        <ul>
+                            <?php foreach ($errors as $error) : ?>
+                                <li><?= htmlspecialchars($error) ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endif; ?>
                 <form class="row g-3" id="mahasiswaForm" action="" method="post" enctype="multipart/form-data">
                     <div class="col-12">
                         <label for="nama" class="form-label">Nama</label>
-                        <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama Anggota">
+                        <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama Anggota" required>
                     </div>
                     <div class="col-12">
                         <label for="alamat" class="form-label">Alamat</label>
-                        <input type="text" class="form-control" id="alamat" placeholder="Jl kH Wahid Hasyim">
+                        <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Jl kH Wahid Hasyim" required>
                     </div>
                     <div class="col-12">
                         <label for="Foto" class="form-label">Foto</label>
-                        <input type="file" class="form-control" id="foto">
+                        <input type="file" class="form-control" id="foto" name="foto" required>
                     </div>
 
                     <div class="col-12">
                         <label for="Foto" class="form-label">Jenis Kelamin</label>
-                        <select name="jenis_kelamin" class="form-select" aria-label="Default select example">
+                        <select name="jenis_kelamin" class="form-select" aria-label="Default select example" required>
 
                             <option selected value="1">Laki Laki</option>
                             <option value="0">Perempuan</option>
                         </select>
                     </div>
-
-                    <!-- <div class="col-12">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="gridCheck">
-                            <label class="form-check-label" for="gridCheck">
-                                Sudah Benar
-                            </label>
-                        </div>
-                    </div> -->
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary">Tambah</button>
                     </div>

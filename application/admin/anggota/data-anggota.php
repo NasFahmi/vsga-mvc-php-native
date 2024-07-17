@@ -1,5 +1,10 @@
 <?php
-require_once '../../../controller/AnggotaController.php';
+require_once 'C:\laragon\www\vsga\helper\path-helper.php';
+require_once $anggotaControlerPath;
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // var_dump($_POST);
+    $errors = $controller->deleteAnggota();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,15 +84,26 @@ require_once '../../../controller/AnggotaController.php';
                                     <td class="align-middle"><?= htmlspecialchars($value['nama']) ?></td>
                                     <td class="align-middle">
                                         <div class="d-flex align-items-center">
-                                            <img src="../../../public/assets/image/library.svg" width="50" height="auto" alt="<?= htmlspecialchars($value['foto']) ?>" class="me-2">
+                                            <img src="../../../public/images/<?= htmlspecialchars($value['foto']) ?>" width="50" height="auto" alt="<?= htmlspecialchars($value['foto']) ?>" class="me-2">
                                         </div>
                                     </td>
-                                    <td class="align-middle"><?= htmlspecialchars($value['jenis_kelamin']) ?></td>
-                                    <td class="align-middle"><?= htmlspecialchars($value['alamat']) ?></td>
                                     <td class="align-middle">
-                                        <button type="button" class="btn btn-success btn-sm" data-mdb-ripple-init>Edit</button>
-                                        <button type="button" class="btn btn-danger btn-sm" data-mdb-ripple-init>Hapus</button>
-                                        <button type="button" class="btn btn-info btn-sm" data-mdb-ripple-init>Cetak Kartu</button>
+                                        <?php
+                                        if (htmlspecialchars($value['jenis_kelamin']) == 1) {
+                                            echo 'Laki Laki';
+                                        } else {
+                                            echo 'Perempuan';
+                                        }
+                                        ?>
+                                    </td>
+                                    <td class="align-middle"><?= htmlspecialchars($value['alamat']) ?></td>
+                                    <td class="align-middle ">
+                                        <a href="./edit-anggota.php?id=<?= htmlspecialchars($value['id']) ?>" type="button" class=" mb-2 col-auto btn btn-success btn-sm" data-mdb-ripple-init>Edit</a>
+                                        <form action="" method="POST" class="mb-2">
+                                            <input type="hidden" name="id" value="<?= htmlspecialchars($value['id']) ?>"> 
+                                            <button type="submit" onclick="return confirm('Apakah Anda Yakin Menhapus Data Ini?')" class="btn btn-danger btn-sm" data-mdb-ripple-init>Hapus</button>
+                                        </form>
+                                        <a type="button" class="btn btn-info btn-sm mb-2" data-mdb-ripple-init>Cetak Kartu</a>
                                     </td>
                                 </tr>
                             <?php
