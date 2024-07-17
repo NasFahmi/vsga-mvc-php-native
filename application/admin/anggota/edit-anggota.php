@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </select>
                     </div>
                     <div class="col-12">
-                    <img src="../../../public/images/<?= htmlspecialchars($data['foto']) ?>"  height="auto" alt="<?= htmlspecialchars($data['foto']) ?>" class="me-2">
+                    <img src="../../../public/images/<?= htmlspecialchars($data['foto']) ?>" width="200" height="auto" alt="<?= htmlspecialchars($data['foto']) ?>" class="me-2">
                     </div>
 
 

@@ -61,7 +61,13 @@ class AnggotaServices
 
     public function showAnggotaById($id)
     {
-        return $this->anggotaRepository->getAnggotaById($id);
+        $result = $this->anggotaRepository->getAnggotaById($id);
+        // var_dump($result);
+        if ($result == null) {
+            header('Location: \application\admin\anggota\data-anggota.php'); // Redirect to
+            exit;
+        }
+        return $result;
     }
     public function updateAnggota($id, $nama, $foto, $jenis_kelamin, $alamat)
     {
@@ -76,12 +82,15 @@ class AnggotaServices
             }
             //! jika ada maka set fotopath == foto dari foto yang baru 
             $fotoPath = $foto;
-        }
-        else {
+        } else {
             // If no new photo, retain the existing one
             $fotoPath = $currentAnggota['foto'];
         }
 
         return $this->anggotaRepository->updateAnggota($id, $nama, $fotoPath, $jenis_kelamin, $alamat);
+    }
+    public function searchAnggota($keyword): array
+    {
+        return $this->anggotaRepository->searchAnggotaFromDatabase($keyword);
     }
 }

@@ -58,4 +58,23 @@ class AnggotaRepository
         $stmt->bind_param("ssisi", $nama, $foto, $jenis_kelamin, $alamat, $id);
         return $stmt->execute();
     }
+    public function searchAnggotaFromDatabase($keyword)
+    {
+        // var_dump($keyword);
+        $keyword = "%{$keyword}%";
+        $stmt = $this->connection->prepare("SELECT * FROM anggota WHERE nama LIKE ? OR alamat LIKE ?");
+        $stmt->bind_param("ss", $keyword, $keyword);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows > 0) {
+            $anggotaList = [];
+            while ($row = $result->fetch_assoc()) {
+                $anggotaList[] = $row;
+            }
+            return $anggotaList;
+        } else {
+            return [];
+        }
+    }
 }

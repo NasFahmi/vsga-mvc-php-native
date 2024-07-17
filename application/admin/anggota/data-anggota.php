@@ -1,9 +1,18 @@
 <?php
 require_once 'C:\laragon\www\vsga\helper\path-helper.php';
 require_once $anggotaControlerPath;
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // var_dump($_POST);
     $errors = $controller->deleteAnggota();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    if (isset($_GET['search'])) {
+        $keyword = $_GET['search'];
+        $data = $controller->searchAnggota($keyword);
+    } else {
+        $data = $controller->showAllAnggota();
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -30,17 +39,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             align-items: center;
         }
     </style>
-
 </head>
 
 <body>
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/components/header-admin.php' ?>
 
-
     <!-- hi admin -->
     <div class="container-fluid">
         <div class="row">
-        <?php include $_SERVER['DOCUMENT_ROOT'] . '/components/sidenav-admin.php' ?>
+            <?php include $_SERVER['DOCUMENT_ROOT'] . '/components/sidenav-admin.php' ?>
 
             <!-- Main content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -50,10 +57,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <h1 class="h2">Dashboard Anggota</h1>
                     </div>
                     <div class="row ">
-                        <form action="" class="col-10" method="POST">
+                        <form action="" class="col-10" method="GET">
                             <div class="input-group my-3">
-                                <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                                <button type="button" class="btn btn-outline-primary" data-mdb-ripple-init>search</button>
+                                <input type="search" name="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                                <button type="submit" class="btn btn-outline-primary" data-mdb-ripple-init>Search</button>
                             </div>
                         </form>
                         <div class="col-2" style="display: flex;justify-content: center;align-items: center;">
@@ -66,7 +73,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
-                                <th scope="col">Id</th>
                                 <th scope="col">Nama</th>
                                 <th scope="col">Foto</th>
                                 <th scope="col">Jenis Kelamin</th>
@@ -80,7 +86,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             ?>
                                 <tr>
                                     <th scope='row' class="align-middle"><?= $id + 1 ?></th>
-                                    <td class="align-middle"><?= htmlspecialchars($value['id']) ?></td>
                                     <td class="align-middle"><?= htmlspecialchars($value['nama']) ?></td>
                                     <td class="align-middle">
                                         <div class="d-flex align-items-center">
@@ -88,13 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         </div>
                                     </td>
                                     <td class="align-middle">
-                                        <?php
-                                        if (htmlspecialchars($value['jenis_kelamin']) == 1) {
-                                            echo 'Laki Laki';
-                                        } else {
-                                            echo 'Perempuan';
-                                        }
-                                        ?>
+                                        <?= htmlspecialchars($value['jenis_kelamin']) == 1 ? 'Laki Laki' : 'Perempuan' ?>
                                     </td>
                                     <td class="align-middle"><?= htmlspecialchars($value['alamat']) ?></td>
                                     <td class="align-middle ">
@@ -111,7 +110,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             ?>
                         </tbody>
                     </table>
-
                 </div>
             </main>
         </div>

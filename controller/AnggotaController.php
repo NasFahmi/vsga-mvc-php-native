@@ -111,6 +111,10 @@ class AnggotaController
             return $errors;
         }
     }
+    public function searchAnggota($keyword): array
+    {
+        return $this->anggotaService->searchAnggota($keyword);
+    }
 }
 
 // Instantiate the controller and fetch data
