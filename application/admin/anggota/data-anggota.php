@@ -1,42 +1,5 @@
 <?php
 require_once '../../../controller/AnggotaController.php';
-// $data = [
-//     [
-//         "id" => 'Mark',
-//         "nama" => 'Otto',
-//         "foto" => '@mdo',
-//         "jenis_kelamin" => 'L',
-//         "alamat" => '@mdo'
-//     ],
-//     [
-//         "id" => 'Jacob',
-//         "nama" => 'Thornton',
-//         "foto" => '@fat',
-//         "jenis_kelamin" => 'L',
-//         "alamat" => '@mdo'
-//     ],
-//     [
-//         "id" => 'Larry',
-//         "nama" => 'the Bird',
-//         "foto" => '@twitter',
-//         "jenis_kelamin" => 'L',
-//         "alamat" => '@mdo'
-//     ],
-//     [
-//         "id" => 'Steve',
-//         "nama" => 'Jobs',
-//         "foto" => '@apple',
-//         "jenis_kelamin" => 'L',
-//         "alamat" => '@mdo'
-//     ],
-//     [
-//         "id" => 'Bill',
-//         "nama" => 'Gates',
-//         "foto" => '@microsoft',
-//         "jenis_kelamin" => 'L',
-//         "alamat" => '@mdo'
-//     ],
-// ];
 ?>
 <!DOCTYPE html>
 <html lang="en">

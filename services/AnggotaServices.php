@@ -1,12 +1,11 @@
 <?php
+require_once 'C:\laragon\www\vsga\repository\AnggotaRepository.php';
 class AnggotaServices
 {
-    private $connection;
     private $anggotaRepository;
 
     public function __construct($connection)
     {
-        $this->connection = $connection;
         $this->anggotaRepository = new AnggotaRepository($connection);
     }
 

@@ -1,7 +1,7 @@
 <?php
-require_once '../model/connection.php';
-require_once '../repository/AnggotaRepository.php';
-require_once '../services/AnggotaServices.php';
+require_once 'C:\laragon\www\vsga\model\connection.php';
+// require_once '../repository/AnggotaRepository.php';
+require_once 'C:\laragon\www\vsga\services\AnggotaServices.php';
 
 class AnggotaController
 {
